@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Person detail</title>
+</head>
+<body>
+    <h1>Person {{t_person}} detail: </h1>
+    <h2>{{t_person.getDescription}}</h2>
+    <h3>List of records bound to this person:</h3>
+    {% for record in t_records_bounds %}
+        <li><a  href="{% url 'record_detail' record.id %}">{{record}}</a></li>
+    {% endfor %}
+<a href="{% url 'persons_index'%}">Back to index</a>
+</body>
+</html>

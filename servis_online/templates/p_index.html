@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Persons index</title>
+</head>
+<body>
+    <h1>List of persons:</h1>
+    {% for person in t_persons %}
+    <li><a  href="{% url 'person_detail' person.id %}">{{person}}</a></li>
+    {% endfor %}
+<a href="{% url 'persons_index'%}">Refresh</a>
+<a href="{% url 'home'%}">Go home</a>
+</body>
+</html>

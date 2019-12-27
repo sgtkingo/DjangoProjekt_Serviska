@@ -1,0 +1,21 @@
+py -m venv spja
+spja\Scripts\activate
+pip3 install django
+
+(django vevn)
+django-admin startproject *gas_stations*
+py manage.py runserver
+
+py manage.py startapp *stations*
+
+py manage.py makemigrations *stations*
+py manage.py migrate
+
+py manage.py shell /interactice console
+	from statins.models import Station, Company
+	filter, get //search .filter(company__name__contains="OWM") -> company.name.contain("OMW)
+ 
+
+py manage.py createsuperuser
+
+//kon0327, jango123

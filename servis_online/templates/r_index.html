@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Records index</title>
+</head>
+<body>
+    <h1>List of records:</h1>
+    {% for record in t_records %}
+    {% if record.isSoluted == True%}
+        <font color="green">
+    {% else %}
+        <font color="red">
+    {% endif %}
+    <li><a  href="{% url 'record_detail' record.id %}">{{record}}</a></li>
+    {% endfor %}
+    <a href="{% url 'records_index'%}">Refresh</a>
+    <a href="{% url 'home'%}">Go home</a>
+</body>
+</html>
