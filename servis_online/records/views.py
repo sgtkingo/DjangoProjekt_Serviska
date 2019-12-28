@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
-from records.models import Record,Person,Solution
+from records.models import Record,Person,Solution,Material
 
 # Create your views here.
 
@@ -26,3 +26,11 @@ def person_detail(request, person_id):
 def person_index(request):
     persons = Person.objects.all().order_by("id")
     return render(request,"p_index.html",{"t_persons": persons})
+
+def show_material_list(request):
+    materials = Material.objects.all().order_by("id")
+    return render(request,"m_list.html",{"t_materials": materials})
+
+def show_material_detail(request, material_id):
+    material = get_object_or_404(Material,id=material_id)
+    return render(request, "m_detail.html", {"t_material": material})

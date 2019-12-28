@@ -24,4 +24,6 @@ urlpatterns = [
     path('records/<int:record_id>/', records.views.record_detail, name="record_detail"),
     path('persons/index', records.views.person_index, name="persons_index"),
     path('persons/<int:person_id>/', records.views.person_detail, name="person_detail"),
+    path('materials/list', records.views.show_material_list, name="material_list"),
+    path('materials/<int:material_id>/', records.views.show_material_detail, name="material_detail"),
 ]

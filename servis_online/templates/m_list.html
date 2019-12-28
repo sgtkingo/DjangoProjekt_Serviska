@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Materials list</title>
+</head>
+<body>
+    <h1>List of materials:</h1>
+    {% for material in t_materials %}
+    <li><a  href="{% url 'material_detail' material.id %}">{{material}}</a></li>
+    {% endfor %}
+    <a href="{% url 'material_list'%}">Refresh</a>
+    <a href="{% url 'home'%}">Go home</a>
+</body>
+</html>

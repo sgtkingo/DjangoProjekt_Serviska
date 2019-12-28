@@ -6,7 +6,10 @@
 </head>
 <body>
     <h1>Record {{t_record}} detail: </h1>
-    <h2>{{t_record.getSolutionDescription}}</h2>
+    <h2>PROBLEM: {{t_record.getProblemDescription}}</h2>
+    <h2>SOLUTION: {{t_record.getSolutionDescription}}</h2>
+        <br>{% for material in t_record.getSolutionMaterials.all %}<li>{{material}}</li>{% endfor %}</br>
+    <h2>Total balance: {{t_record.getSolutionBalance}}</h2>
     <h2>{{t_record.getPersonDescription}}</h2>
 <a href="{% url 'records_index'%}">Back to index</a>
 </body>
