@@ -8,5 +8,6 @@
     <h1>Material {{t_material.material_name}} detail:</h1>
     <h2>DESCRIPTION:{{t_material}}</h2>
 <a href="{% url 'material_list'%}">Back to list</a>
+<a href="{% url 'material_edit' t_material.id %}">Edit</a>
 </body>
 </html>

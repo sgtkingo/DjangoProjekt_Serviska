@@ -14,6 +14,7 @@
     {% endif %}
     <li><a  href="{% url 'record_detail' record.id %}">{{record}}</a></li>
     {% endfor %}
+    <a href="{% url 'record_add'%}">Add new record</a>
     <a href="{% url 'records_index'%}">Refresh</a>
     <a href="{% url 'home'%}">Go home</a>
 </body>

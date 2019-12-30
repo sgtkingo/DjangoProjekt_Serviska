@@ -1,6 +1,5 @@
 from django.db import models
 from datetime import datetime
-from django.utils.translation import gettext_lazy as lazy
 
 # Create your models here.
 
@@ -8,8 +7,10 @@ class Record(models.Model):
     timestamp = models.DateTimeField(default=datetime.now())
     device_info = models.CharField(max_length=50)
     device_problem = models.CharField(max_length=100)
-    servis_solution = models.ForeignKey("Solution", on_delete=models.SET_NULL, blank=True, null=True)
-    person_info = models.ForeignKey("Person",on_delete=models.CASCADE)
+    servis_solution = models.ForeignKey("Solution", on_delete=models.SET_DEFAULT, blank=True, null=True, default=None)
+    solution_status=models.BooleanField(default=False)
+
+    person_info = models.ForeignKey("Person",on_delete=models.CASCADE,blank=True,null=True,default=None)
     DEVICE_TYPES = [
         ('NTB', 'Notebook'),
         ('PC', 'Computer'),
@@ -30,16 +31,19 @@ class Record(models.Model):
             return self.servis_solution
         else:
             return "No solution yet..."
+
     def getSolutionMaterials(self):
         if self.servis_solution is not None:
             return self.servis_solution.getMaterials()
         else:
             return "---"
+
     def getSolutionBalance(self):
         if self.servis_solution is not None:
             return self.servis_solution.getBalance()
         else:
             return "-"
+
     def getPersonDescription(self):
         if self.person_info is not None:
             return self.person_info.getDescription()
@@ -47,28 +51,38 @@ class Record(models.Model):
             return "No person added!"
 
     def isSoluted(self):
-        if self.servis_solution is not None:
-            return self.servis_solution.isOK()
+        return self.solution_status
+
+    def getSolutionStatus(self):
+        if self.hasSolution() is False:
+            return "No solution yet..."
+        if self.solution_status is True:
+            return "Solution OK!"
         else:
-            return "false"
+            return "Solution DOES NOT WORK!"
+
+    def hasSolution(self):
+        if self.servis_solution is None:
+            return False
+        else:
+            return True
 
 class Person(models.Model):
     person_name = models.CharField(max_length=30)
     person_address = models.CharField(max_length=100)
-    person_contact = models.EmailField(max_length=50)
+    person_email = models.EmailField(max_length=50,default=None)
     person_phone = models.BigIntegerField()
 
     def __str__(self):
         return self.person_name
 
     def getDescription(self):
-        return "Name: {} / Phone: {} \n Contact: {}  / {}".format(self.person_name,self.person_phone,self.person_address,self.person_contact)
+        return "Person: {} / Phone: {} \t ,Contact: {}  / {}".format(self.person_name,self.person_phone,self.person_address,self.person_email)
 
 class Solution(models.Model):
     solution_description=models.CharField(max_length=100)
-    solution_cost=models.IntegerField()
-    solution_ok=models.BooleanField()
-
+    solution_cost=models.IntegerField(default=0)
+    solution_time = models.TimeField(default='01:00:00')
     SOLUTION_TYPE = [
         ('HW_REP', 'Hardware Repair'),
         ('HW_CHG', 'Hardware Change'),
@@ -77,14 +91,9 @@ class Solution(models.Model):
         ('OTHER', 'Other repair'),
     ]
     solution_type = models.CharField(max_length=6,choices=SOLUTION_TYPE,default="NON")
-    solution_materials=models.ManyToManyField("Material")
-
+    solution_materials=models.ManyToManyField("Material", default=None)
     def __str__(self):
         return "{} (cost: {},- Kc) -> [{}]".format(self.solution_description,self.solution_cost,self.solution_type)
-
-    def isOK(self):
-        return self.solution_ok
-
     def getMaterials(self):
         return self.solution_materials
 
@@ -104,7 +113,7 @@ class Material(models.Model):
         ('OTHER', 'Other material'),
     ]
     material_type = models.CharField(max_length=5,choices=MATERIAL_TYPE,default="NON")
-    material_cost=models.IntegerField()
+    material_cost=models.IntegerField(default=0)
 
     def __str__(self):
         return "{} ({} -> {},- Kc) [{}]".format(self.material_name,self.material_info,self.material_cost,self.material_type)

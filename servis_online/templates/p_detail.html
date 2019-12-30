@@ -12,5 +12,6 @@
         <li><a  href="{% url 'record_detail' record.id %}">{{record}}</a></li>
     {% endfor %}
 <a href="{% url 'persons_index'%}">Back to index</a>
+<a href="{% url 'person_edit' t_person.id %}">Edit</a>
 </body>
 </html>

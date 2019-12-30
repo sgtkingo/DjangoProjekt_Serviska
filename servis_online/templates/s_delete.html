@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<h1>Do YOU  WANT DELETE this solution?</h1>
+<form action="{% url 'solution_delete' t_record.id %}" method="POST">
+    {% csrf_token %}
+    <h2>SOLUTION: {{t_solution}}</h2>
+        <h3>Materials: </h3>
+               {% for material in t_solution.getMaterials.all %}<li>{{material}}</li>{% endfor %}
+    <h2>Records using this solution: </h2>
+        {% for record in t_records_bounds %}
+            <li><a  href="{% url 'record_detail' record.id %}">{{record}}</a></li>
+        {% endfor %}
+    <br><input type="submit" value="DELETE SOLUTION(!)" onclick="alert('Solution deleted...!')"></br>
+</form>
+<a href="{% url 'record_detail' t_record.id %}">Back</a>
+</body>
+</html>

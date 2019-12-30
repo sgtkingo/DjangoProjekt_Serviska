@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<h1>Person edit</h1>
+<form action="{% url 'person_edit' form.instance.id %}" method="POST">
+{% csrf_token %}
+<table>
+{{ form.as_table }}
+</table>
+<input type="submit" value="Save changes" onclick="alert('Data saved!')">
+<a href="{% url 'person_detail' t_person.id %}">Back</a>
+</form>
+</body>
+</html>

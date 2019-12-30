@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<h1>Solution add</h1>
+    <form action="{% url 'solution_add' t_record.id %}" method="POST">
+{% csrf_token %}
+<table>
+{{ form.as_table }}
+</table>
+<input type="submit" value="Create new solution" onclick="alert('Data saved!')">
+<a href="{% url 'record_detail' t_record.id %}">Back</a>
+</form>
+</body>
+</html>

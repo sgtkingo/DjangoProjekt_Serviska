@@ -26,4 +26,11 @@ urlpatterns = [
     path('persons/<int:person_id>/', records.views.person_detail, name="person_detail"),
     path('materials/list', records.views.show_material_list, name="material_list"),
     path('materials/<int:material_id>/', records.views.show_material_detail, name="material_detail"),
+    path('records/edit/<int:record_id>/', records.views.record_edit, name='record_edit'),
+    path('records/add/', records.views.record_add, name='record_add'),
+    path('persons/edit/<int:person_id>/', records.views.person_edit, name='person_edit'),
+    path('materials/edit/<int:material_id>/', records.views.material_edit, name='material_edit'),
+    path('records/<int:record_id>/edit_solution/', records.views.solution_edit, name='solution_edit'),
+    path('records/<int:record_id>/new_solution/', records.views.solution_add, name='solution_add'),
+    path('records/<int:record_id>/delete_solution/', records.views.solution_delete, name='solution_delete'),
 ]

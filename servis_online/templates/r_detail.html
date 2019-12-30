@@ -6,11 +6,20 @@
 </head>
 <body>
     <h1>Record {{t_record}} detail: </h1>
-    <h2>PROBLEM: {{t_record.getProblemDescription}}</h2>
-    <h2>SOLUTION: {{t_record.getSolutionDescription}}</h2>
+    <h3>PROBLEM: {{t_record.getProblemDescription}}</h3>
+    <h3>SOLUTION: {{t_record.getSolutionDescription}}</h3>
         <br>{% for material in t_record.getSolutionMaterials.all %}<li>{{material}}</li>{% endfor %}</br>
-    <h2>Total balance: {{t_record.getSolutionBalance}}</h2>
-    <h2>{{t_record.getPersonDescription}}</h2>
+    <h3>Total balance: {{t_record.getSolutionBalance}}</h3>
+    {% if t_record.hasSolution == False%}
+        <a href="{% url 'solution_add' t_record.id %}">Add solution</a>
+    {% else %}
+        <a href="{% url 'solution_edit' t_record.id  %}">Edit solution</a>
+        <a href="{% url 'solution_delete' t_record.id %}">Delete solution</a>
+    {% endif %}
+        <a href="{% url 'record_edit' t_record.id %}">Change solution</a>
+    <h3>STATUS: {{t_record.getSolutionStatus}}</h3>
+    <h3>{{t_record.getPersonDescription}}</h3>
 <a href="{% url 'records_index'%}">Back to index</a>
+<a href="{% url 'record_edit' t_record.id %}">Edit</a>
 </body>
 </html>
