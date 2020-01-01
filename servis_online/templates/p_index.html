@@ -9,6 +9,7 @@
     {% for person in t_persons %}
     <li><a  href="{% url 'person_detail' person.id %}">{{person}}</a></li>
     {% endfor %}
+<a href="{% url 'person_add'%}">Add new person</a>
 <a href="{% url 'persons_index'%}">Refresh</a>
 <a href="{% url 'home'%}">Go home</a>
 </body>

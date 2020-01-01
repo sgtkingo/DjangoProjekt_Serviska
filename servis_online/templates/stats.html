@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Statistics</title>
+</head>
+<body>
+<h1>You servis statistics:</h1>
+    <h3>List of records with solution:</h3>
+    {% for record in t_records %}
+    {% if record.hasSolution == True%}
+        <div>
+            <li><a  href="{% url 'record_detail' record.id %}">{{record.id}}] {{record}}</a></li>
+            <h5>
+                <li>STATUS: {{ record.getSolutionStatus }}</li>
+                {%if record.getSolutionBalance > 0%}
+                <font color="green">{%else%}<font color="red">
+                {%endif%}
+                <li>BALANCE: {{ record.getSolutionBalance }} ,- Kc</li>
+                </font>
+            </h5>
+        </div>
+    {% endif %}
+    {% endfor %}
+     {%if t_balance > 0%}
+    <font color="green">{%else%}<font color="red">
+    {%endif%}
+    <h1>Total balance: <b>{{t_balance}}</b>,- Kc</h1>
+    </font>
+    <a href="{% url 'stats'%}">Refresh</a>
+    <a href="{% url 'home'%}">Go home</a>
+</body>
+</html>

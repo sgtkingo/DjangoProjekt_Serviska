@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<h1>Material ADD</h1>
+<form action="{% url 'material_add' %}" method="POST">
+{% csrf_token %}
+<table>
+{{ form.as_table }}
+</table>
+<input type="submit" value="Create new material!" onclick="alert('Material created!')">
+<a href="{% url 'material_list'%}">Back to index</a>
+</form>
+</body>
+</html>

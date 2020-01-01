@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<h1>Person ADD</h1>
+<form action="{% url 'person_add' %}" method="POST">
+{% csrf_token %}
+<table>
+{{ form.as_table }}
+</table>
+<input type="submit" value="Create new person!" onclick="alert('Person created!')">
+<a href="{% url 'persons_index'%}">Back to index</a>
+</form>
+</body>
+</html>

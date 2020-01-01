@@ -5,9 +5,21 @@
     <title>Home</title>
 </head>
 <body>
-    <h1>Welcome to Serviska web application</h1>
-    <a href="{% url 'persons_index'%}">Go to Person index</a>
-    <a href="{% url 'records_index'%}">Go to Records index</a>
-    <a href="{% url 'material_list'%}">Show materials list</a>
+    <h1 style="text-align:center;">Welcome to Serviska web application</h1>
+    {% load static %}
+    <div style="text-align:center;">
+    <a href="{% url 'persons_index'%}">
+        <img src="{% static 'add_person.png' %}" alt="Persons" style="width:256px;height:256px;">
+    </a>
+    <a href="{% url 'records_index'%}">
+        <img src="{% static 'plus.png' %}" alt="Records" style="width:256px;height:256px;">
+    </a>
+    <a href="{% url 'material_list'%}">
+        <img src="{% static 'add_objects.png' %}" alt="Materials" style="width:256px;height:256px;">
+    </a>
+    <a href="{% url 'stats'%}">
+        <img src="{% static 'analytics.png' %}" alt="Stats" style="width:256px;height:256px;">
+    </a>
+    </div>
 </body>
 </html>

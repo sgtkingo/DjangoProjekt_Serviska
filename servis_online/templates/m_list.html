@@ -9,6 +9,7 @@
     {% for material in t_materials %}
     <li><a  href="{% url 'material_detail' material.id %}">{{material}}</a></li>
     {% endfor %}
+    <a href="{% url 'material_add'%}">Add new material</a>
     <a href="{% url 'material_list'%}">Refresh</a>
     <a href="{% url 'home'%}">Go home</a>
 </body>

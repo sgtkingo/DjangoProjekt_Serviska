@@ -42,7 +42,7 @@ class Record(models.Model):
         if self.servis_solution is not None:
             return self.servis_solution.getBalance()
         else:
-            return "-"
+            return 0
 
     def getPersonDescription(self):
         if self.person_info is not None:
@@ -53,13 +53,19 @@ class Record(models.Model):
     def isSoluted(self):
         return self.solution_status
 
+    def Resolve(self):
+        if self.solution_status==True:
+            self.solution_status=False
+        else:
+            self.solution_status=True
+
     def getSolutionStatus(self):
-        if self.hasSolution() is False:
-            return "No solution yet..."
         if self.solution_status is True:
             return "Solution OK!"
+        if self.hasSolution() is False:
+            return "No solution yet..."
         else:
-            return "Solution DOES NOT WORK!"
+            return "Solution DOES NOT WORK YET!"
 
     def hasSolution(self):
         if self.servis_solution is None:

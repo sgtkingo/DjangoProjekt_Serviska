@@ -13,5 +13,9 @@
     {% endfor %}
 <a href="{% url 'persons_index'%}">Back to index</a>
 <a href="{% url 'person_edit' t_person.id %}">Edit</a>
+<form action="{% url 'person_delete' t_person.id %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="Delete person (!)" />
+</form>
 </body>
 </html>

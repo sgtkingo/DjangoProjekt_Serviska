@@ -9,5 +9,9 @@
     <h2>DESCRIPTION:{{t_material}}</h2>
 <a href="{% url 'material_list'%}">Back to list</a>
 <a href="{% url 'material_edit' t_material.id %}">Edit</a>
+<form action="{% url 'material_delete' t_material.id %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="Delete material (!)" />
+</form>
 </body>
 </html>
