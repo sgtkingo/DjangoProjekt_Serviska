@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from records.models import Record,Person,Solution,Material
-from records.forms import RecordForm,PersonForm,MaterialForm,SolutionForm
+from records.forms import RecordForm,PersonForm,MaterialForm,SolutionForm,SearchForm
 
 # Create your views here.
 
@@ -27,7 +27,14 @@ def record_detail(request, record_id):
 
 def records_index(request):
     records = Record.objects.all().order_by("id")
-    return render(request,"r_index.html",{"t_records": records})
+    if request.method == 'POST':
+        form = SearchForm(request.POST)
+        if form.is_valid():
+            data=form['search_text'].value()
+            return show_search_result(request,data)
+    else:
+        form = SearchForm()
+    return render(request,"r_index.html",{"t_records": records, 'form':form})
 
 def person_detail(request, person_id):
     person = get_object_or_404(Person,id=person_id)
@@ -177,3 +184,19 @@ def material_delete(request, material_id):
         return show_material_list(request)
     else:
         return show_material_detail(request,material.id)
+
+def show_search_result(request,data):
+    result={}
+    status=False
+    records = Record.objects.all()
+    words=data.__str__().split(" ")
+    tmp=""
+    for word in words:
+        for record in records:
+            tmp=record.__str__()
+            if(tmp.find(word) != -1):
+                if( record not in result.keys()):
+                    result[record]=[]
+                result[record].append(word)
+                status=True
+    return render(request, 'r_search.html', {'t_result':result,'t_data':data,'status':status})

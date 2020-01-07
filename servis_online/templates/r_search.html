@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<h1>Seach for -{{t_data}}- results: </h1>
+<div>
+    {% if status == False %}
+        <h2>Nothing found...</h2>
+    {% endif %}
+    {% for result in t_result %}
+        <li>
+            <a  href="{% url 'record_detail' result.id %}">{{result}}</a>
+        </li>
+    {% endfor %}
+    <i>Raw: {{t_result}}</i>
+</div>
+<a href="{% url 'records_index'%}">Back to index</a>
+</body>
+</html>

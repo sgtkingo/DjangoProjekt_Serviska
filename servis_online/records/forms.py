@@ -21,3 +21,6 @@ class SolutionForm(forms.ModelForm):
     class Meta:
         model = Solution
         exclude = []
+
+class SearchForm(forms.Form):
+    search_text = forms.CharField(label='Search text')

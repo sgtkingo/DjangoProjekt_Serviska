@@ -6,6 +6,11 @@
 </head>
 <body>
     <h1>List of records:</h1>
+    <form action="{% url 'records_index' %}" method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Find">
+    </form>
     {% for record in t_records %}
     {% if record.isSoluted == True%}
         <font color="green">
